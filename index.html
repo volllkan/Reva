@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="tr" class="scroll-smooth">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolyo | </title>
+  <meta name="description"
+    content="Kendimi tanıttığım, projelerimi ve yeteneklerimi paylaştığım kişisel portfolyo sitesi." />
+  <meta property="og:title" content="Portfolyo | Adınız Soyadınız" />
+  <meta property="og:description"
+    content="Kendimi tanıttığım, projelerimi ve yeteneklerimi paylaştığım kişisel portfolyo sitesi." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>✨</text></svg>">
+
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#5b8def',
+              dark: '#3e6fd9'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px -10px rgba(0,0,0,0.2)'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script>
+    // Tema preferansı: ilk yüklemede uygulansın (FOUC engelleme)
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+
+<body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100">
+  <!-- Navbar -->
+  <header
+    class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-slate-950/60 border-b border-slate-200/60 dark:border-slate-800">
+    <nav class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center justify-between h-16">
+        <a href="#home"
+          class="font-semibold tracking-tight text-slate-900 dark:text-white inline-flex items-center gap-2">
+          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-label="Vera Medya Logo İkonu" focusable="false">
+            <!-- Bu SVG dosyası, Vera Medya'nın stilize V ve ay/hilal sembolünü temsil eder. -->
+            <title>Vera Medya Logo İkonu</title>
+            <!-- Arka Plan: Koyu Gece Mavisi (Şema Rengi) -->
+            <rect width="100%" height="100%" fill="none" />
+            <!-- Soldaki dış V formu (Koyu Mavi/Antrasit) -->
+            <path d="M 0 50 L 25 100 L 50 50 L 25 0 Z" fill="#122A4E" />
+            <!-- Sağdaki V/Hilal iç formu (Vurgu Rengi: Turkuaz) -->
+            <path d="M 30 50 L 55 100 L 80 50 L 55 0 Z" fill="#00A389" />
+            <!-- İkonun genel birleşik görünümünü sağlayan, V şeklinin sağ tarafı (Kontrast) -->
+            <path d="M 50 50 L 75 100 L 100 50 L 75 0 Z" fill="#122A4E" />
+            <!-- Not: Bu ikon, önceki görseldeki V formunu basit geometrik şekillerle yeniden canlandırmaktadır. -->
+          </svg>
+          <span>Adınız Soyadınız</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-6">
+          <a href="#about" class="nav-link">Hakkımda</a>
+          <a href="#skills" class="nav-link">Yetenekler</a>
+          <a href="#projects" class="nav-link">Projeler</a>
+          <a href="#contact" class="nav-link">İletişim</a>
+          <button id="themeToggle"
+            class="inline-flex items-center justify-center w-9 h-9 rounded-md border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition">
+            <span class="sr-only">Temayı değiştir</span>
+            <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden dark:inline" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364-1.414-1.414M6.05 7.05 4.636 5.636m12.728 0L16.95 7.05M6.05 16.95l-1.414 1.414" />
+            </svg>
+            <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 dark:hidden" fill="none"
+              viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+        <button id="mobileMenuBtn"
+          class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-md hover:bg-slate-100 dark:hover:bg-slate-900 transition"
+          aria-label="Menü">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <div id="mobileMenu" class="md:hidden hidden flex-col gap-2 pb-4">
+        <a href="#about" class="mobile-link">Hakkımda</a>
+        <a href="#skills" class="mobile-link">Yetenekler</a>
+        <a href="#projects" class="mobile-link">Projeler</a>
+        <a href="#contact" class="mobile-link">İletişim</a>
+        <button id="themeToggleMobile"
+          class="mt-2 inline-flex items-center justify-center px-3 py-2 rounded-md border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-900 transition">Tema:
+          Açık/Koyu</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="relative overflow-hidden">
+    <div
+      class="absolute inset-0 -z-10 bg-gradient-to-b from-brand/10 via-transparent to-transparent dark:from-brand/15">
+    </div>
+    <div class="max-w-6xl mx-auto px-4 py-24 md:py-28">
+      <div class="grid md:grid-cols-12 gap-8 items-center">
+        <div class="md:col-span-7 space-y-6">
+          <span
+            class="inline-flex items-center gap-2 rounded-full border border-brand/30 px-3 py-1 text-xs uppercase tracking-wider text-brand">Merhaba
+            👋</span>
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">Ben <span
+              class="text-brand">Adınız</span>. Modern ve kullanıcı odaklı arayüzler geliştiriyorum.</h1>
+          <p class="text-slate-600 dark:text-slate-300 max-w-2xl">Kısa bir özet: Uzmanlık alanlarınız, odaklandığınız
+            teknolojiler ve hangi tür projelerde yer aldığınız.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#projects" class="btn-primary">Projelerimi Gör</a>
+            <a href="#contact" class="btn-secondary">İletişime Geç</a>
+          </div>
+        </div>
+        <div class="md:col-span-5">
+          <div
+            class="relative mx-auto w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden shadow-soft ring-1 ring-slate-200/60 dark:ring-slate-800">
+            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=800&auto=format&fit=crop"
+              alt="Profil görseli" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hakkımda -->
+  <section id="about" class="section">
+    <div class="section-container">
+      <h2 class="section-title">Hakkımda</h2>
+      <p class="section-text">Kendinizi birkaç paragrafla anlatın. Deneyimleriniz, güçlü yanlarınız, ilgi alanlarınız ve
+        değerleriniz. Mümkünse somut başarılar ve sayılar ekleyin.</p>
+    </div>
+  </section>
+
+  <!-- Yetenekler -->
+  <section id="skills" class="section">
+    <div class="section-container">
+      <h2 class="section-title">Yetenekler</h2>
+      <ul class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        <li class="chip">HTML</li>
+        <li class="chip">CSS / Tailwind</li>
+        <li class="chip">JavaScript</li>
+        <li class="chip">TypeScript</li>
+        <li class="chip">React</li>
+        <li class="chip">Next.js</li>
+        <li class="chip">Node.js</li>
+        <li class="chip">Git / GitHub</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Projeler -->
+  <section id="projects" class="section">
+    <div class="section-container">
+      <div class="flex items-center justify-between gap-4 mb-8">
+        <h2 class="section-title m-0">Projeler</h2>
+        <a href="#contact" class="text-brand hover:underline">Proje mi konuşalım?</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Proje Kartı 1 -->
+        <article class="card"
+          data-project='{"title":"E-ticaret Arayüzü","desc":"Modern ve hızlı bir e-ticaret vitrin arayüzü.","images":["https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"]}'>
+          <img class="card-img"
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop"
+            alt="Proje görseli" />
+          <div class="card-body">
+            <h3 class="card-title">E-ticaret Arayüzü</h3>
+            <p class="card-text">Modern ve hızlı bir e-ticaret vitrin arayüzü.</p>
+          </div>
+        </article>
+        <!-- Proje Kartı 2 -->
+        <article class="card"
+          data-project='{"title":"Portfolyo Şablonu","desc":"Kişisel marka için şık tek sayfa site.","images":["https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop"]}'>
+          <img class="card-img"
+            src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop"
+            alt="Proje görseli" />
+          <div class="card-body">
+            <h3 class="card-title">Portfolyo Şablonu</h3>
+            <p class="card-text">Kişisel marka için şık tek sayfa site.</p>
+          </div>
+        </article>
+        <!-- Proje Kartı 3 -->
+        <article class="card"
+          data-project='{"title":"Dashboard","desc":"Veri görselleştirme odaklı yönetim paneli.","images":["https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop"]}'>
+          <img class="card-img"
+            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop"
+            alt="Proje görseli" />
+          <div class="card-body">
+            <h3 class="card-title">Dashboard</h3>
+            <p class="card-text">Veri görselleştirme odaklı yönetim paneli.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- İletişim -->
+  <section id="contact" class="section">
+    <div class="section-container">
+      <h2 class="section-title">İletişim</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <form id="contactForm" class="space-y-4">
+          <div>
+            <label for="name" class="label">Ad Soyad</label>
+            <input id="name" name="name" type="text" class="input" placeholder="Adınız" required />
+          </div>
+          <div>
+            <label for="email" class="label">E-posta</label>
+            <input id="email" name="email" type="email" class="input" placeholder="ornek@mail.com" required />
+          </div>
+          <div>
+            <label for="message" class="label">Mesaj</label>
+            <textarea id="message" name="message" rows="4" class="input" placeholder="Merhaba..." required></textarea>
+          </div>
+          <div class="flex gap-3">
+            <button type="submit" class="btn-primary">Gönder</button>
+            <a href="mailto:volllkan.1@gmail.com" class="btn-secondary">E-Posta</a>
+          </div>
+          <p id="formMsg" class="text-sm"></p>
+        </form>
+        <div class="space-y-3">
+          <div class="flex items-center gap-3"><span class="icon">📧</span> <a class="link"
+              href="mailto:volllkan.1@gmail.com">volllkan.1@gmail.com</a></div>
+          <div class="flex items-center gap-3"><span class="icon">💼</span> <a class="link" href="#" target="_blank"
+              rel="noreferrer">LinkedIn</a></div>
+          <div class="flex items-center gap-3"><span class="icon">💻</span> <a class="link" href="#" target="_blank"
+              rel="noreferrer">GitHub</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-8">
+    <div class="max-w-6xl mx-auto px-4 text-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-slate-600 dark:text-slate-400">© <span id="year"></span> Adınız Soyadınız. Tüm hakları saklıdır.
+      </p>
+      <div class="flex items-center gap-4">
+        <a href="#home" class="link">Yukarı Çık</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Proje Modal -->
+  <div id="projectModal" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/50" data-close="modal"></div>
+    <div
+      class="relative max-w-3xl mx-auto mt-20 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-soft overflow-hidden">
+      <div class="flex items-center justify-between px-5 py-3 border-b border-slate-200 dark:border-slate-800">
+        <h3 id="modalTitle" class="font-semibold">Proje Başlığı</h3>
+        <button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-900 rounded-md" data-close="modal"
+          aria-label="Kapat">✕</button>
+      </div>
+      <div class="p-5 space-y-4">
+        <div id="modalGallery" class="grid sm:grid-cols-2 gap-3"></div>
+        <p id="modalDesc" class="text-slate-600 dark:text-slate-300"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/app.js"></script>
+</body>
+
+</html>

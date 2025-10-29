@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-tek-sayfa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tek sayfa portfolyo ve serverless e-posta",
+  "dependencies": {
+    "resend": "^4.0.0"
+  }
+}
